@@ -1,3 +1,7 @@
+let currentLang = 'ru';
+let upperCase = false;
+let pressedKeys = [];
+
 let contentWrapper = document.createElement('div');
 contentWrapper.className = 'content-wrapper';
 document.body.append(contentWrapper);
@@ -44,4 +48,33 @@ function createKeyboard() {
         );
     }
     keyboardKeys.appendChild(fragment);
+}
+
+function bindMouseClicks() {
+    keyboard.addEventListener('click', function(e) {
+        if (e.target.tagName === 'BUTTON') {
+            if (!(e.target.value in SPECIAL_KEYS))
+                printLetter(e.target.innerText);
+            else {
+                handleSpecialKey(e.target.value);
+            }
+
+            textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
+        }
+    })
+}
+
+function keyboardClickButton(e) {
+    e.preventDefault();
+    let keyboardKey = document.querySelectorAll('.keyboard__key')
+    for (let i = 0; i < keyboardKey.length; i++) {
+        if (e.keyCode == keyboardKey[i].value) {
+            keyboardKey[i].className += ' active';
+        }
+    }
+
+    if (!pressedKeys.includes(e.keyCode))
+        pressedKeys.push(e.keyCode);
+    handleKeyPress(e.keyCode, e.location);
+    checkKeyCombinations();
 }
