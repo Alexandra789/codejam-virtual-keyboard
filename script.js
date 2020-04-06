@@ -15,3 +15,33 @@ contentWrapper.appendChild(keyboard);
 let keyboardKeys = document.createElement('div');
 keyboardKeys.className = 'keyboard__keys';
 keyboard.appendChild(keyboardKeys);
+
+function createButton(keyCode, lang) {
+    let keyboardKey = document.createElement('button');
+    keyboardKey.className = 'keyboard__key';
+    keyboardKey.type = 'button';
+    keyboardKey.value = keyCode;
+    keyboardKey.innerText = KEY_LAYOUTS[lang][keyCode];
+
+    if (keyCode >= 37 && keyCode <= 40)
+        keyboardKey.innerText = '';
+
+    if (keyCode in SPECIAL_KEYS)
+        keyboardKey.className += ` ${ SPECIAL_KEYS[keyCode] }
+    `;
+    else if (upperCase) {
+        keyboardKey.innerText = keyboardKey.innerText.toUpperCase();
+    }
+
+    return keyboardKey;
+}
+
+function createKeyboard() {
+    let fragment = document.createDocumentFragment()
+    for (let i = 0; i < KEY_MAP.length; i++) {
+        fragment.appendChild(
+            createButton(KEY_MAP[i], currentLang)
+        );
+    }
+    keyboardKeys.appendChild(fragment);
+}
