@@ -38,3 +38,99 @@
     padding: 0px;
     position: relative;
 }
+
+.keyboard__key:hover {
+    background-color: #e85af0;
+}
+
+.keyboard__key:active {
+    background-color: #898989;
+    border-radius: 8px;
+    border: none;
+}
+
+.backspace {
+    width: 90px;
+}
+
+.left,
+.right {
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+.left {
+    background-image: url('../codejam/assets/images/left.svg');
+}
+
+.right {
+    background-image: url('../codejam/assets/images/right.svg');
+}
+
+.up,
+.down {
+    background-size: 46px;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: 0px;
+}
+
+.up {
+    background-image: url('../codejam/assets/images/up.svg');
+}
+
+.down {
+    background-position-y: -30px;
+    background-image: url('../codejam/assets/images/down.svg');
+}
+
+.space {
+    width: 415px;
+}
+
+.tab,
+.del {
+    width: 43px
+}
+
+.enter,
+.caps {
+    width: 107px;
+}
+
+.shift-left {
+    width: 155px;
+}
+
+.info-wrapper {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.up,
+.left,
+.right,
+.down,
+.space,
+.tab,
+.del,
+.enter,
+.caps,
+.shift-left,
+.shift-right,
+.backspace,
+.win,
+.ctrl-left,
+.alt-left,
+.ctrl-right,
+.alt-right {
+    background-color: #bab2b2;
+}
+
+.active {
+    background-color: #898989;
+    border-radius: 8px;
+    border: none;
+}
