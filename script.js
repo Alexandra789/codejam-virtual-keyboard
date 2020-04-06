@@ -24,6 +24,16 @@ let infoWrapper = document.createElement('div');
 infoWrapper.className = 'info-wrapper';
 document.body.append(infoWrapper);
 
+let infoAboutOS = document.createElement('h3');
+infoAboutOS.className = 'info-about-os';
+infoAboutOS.innerText += "Клавиатура создана в операционной системе Windows";
+infoWrapper.append(infoAboutOS);
+
+let infoAboutLang = document.createElement('h3');
+infoAboutLang.className = 'info-about-lang';
+infoAboutLang.innerText += 'Для переключения языка комбинация: левыe shift + alt';
+infoWrapper.append(infoAboutLang);
+
 function createButton(keyCode, lang) {
     let keyboardKey = document.createElement('button');
     keyboardKey.className = 'keyboard__key';
