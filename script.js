@@ -78,3 +78,47 @@ function keyboardClickButton(e) {
     handleKeyPress(e.keyCode, e.location);
     checkKeyCombinations();
 }
+
+function keyboardReleaseButton(e) {
+    e.preventDefault();
+    let keyboardKey = document.querySelectorAll('.keyboard__key')
+    for (let i = 0; i < keyboardKey.length; i++) {
+        if (e.keyCode == keyboardKey[i].value) {
+            keyboardKey[i].classList.remove('active');
+        }
+    }
+
+    var index = pressedKeys.indexOf(e.keyCode);
+    if (index !== -1) pressedKeys.splice(index, 1);
+}
+
+function printLetter(letter) {
+    if (!letter) return;
+
+    if (upperCase)
+        letter = letter.toUpperCase();
+    textarea.innerHTML += letter;
+}
+
+function switchLang() {
+    let nextLang;
+    let index = LANGS.indexOf(currentLang);
+    if (index >= LANGS.length - 1)
+        nextLang = LANGS[0];
+    else
+        nextLang = LANGS[index + 1];
+
+    changeLang(nextLang);
+}
+
+function changeLang(lang) {
+    currentLang = lang;
+    keyboardKeys.innerHTML = '';
+    createKeyboard();
+}
+
+function checkKeyCombinations() {
+    if (pressedKeys.length == 2 && pressedKeys.includes(16) && pressedKeys.includes(18)) {
+        switchLang();
+    }
+}
