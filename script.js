@@ -158,3 +158,18 @@ function checkKeyCombinations() {
         switchLang();
     }
 }
+
+window.onbeforeunload = function() {
+    localStorage.setItem("lang", currentLang);
+}
+
+window.onload = function() {
+    var lang = localStorage.getItem("lang");
+    if (lang !== null)
+        currentLang = lang;
+
+    window.onkeydown = keyboardClickButton;
+    window.onkeyup = keyboardReleaseButton;
+    createKeyboard();
+    bindMouseClicks();
+}
