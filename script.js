@@ -20,6 +20,10 @@ let keyboardKeys = document.createElement('div');
 keyboardKeys.className = 'keyboard__keys';
 keyboard.appendChild(keyboardKeys);
 
+let infoWrapper = document.createElement('div');
+infoWrapper.className = 'info-wrapper';
+document.body.append(infoWrapper);
+
 function createButton(keyCode, lang) {
     let keyboardKey = document.createElement('button');
     keyboardKey.className = 'keyboard__key';
@@ -92,12 +96,22 @@ function keyboardReleaseButton(e) {
     if (index !== -1) pressedKeys.splice(index, 1);
 }
 
+function eraseLetter() {
+    textarea.innerHTML = textarea.innerHTML.slice(0, -1);
+}
+
 function printLetter(letter) {
     if (!letter) return;
 
     if (upperCase)
         letter = letter.toUpperCase();
     textarea.innerHTML += letter;
+}
+
+function toggleCaps() {
+    upperCase = !upperCase;
+    keyboardKeys.innerHTML = '';
+    createKeyboard();
 }
 
 function switchLang() {
@@ -115,6 +129,28 @@ function changeLang(lang) {
     currentLang = lang;
     keyboardKeys.innerHTML = '';
     createKeyboard();
+}
+
+function handleSpecialKey(key) {
+    if (key == 32) {
+        printLetter(' ');
+    } else if (key == 8) {
+        eraseLetter();
+    } else if (key == 20) {
+        toggleCaps();
+    } else if (key === 38) {
+
+    }
+}
+
+function handleKeyPress(keyCode) {
+    if (keyCode in SPECIAL_KEYS)
+        handleSpecialKey(keyCode);
+    else {
+        printLetter(KEY_LAYOUTS[currentLang][keyCode]);
+    }
+
+    textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
 }
 
 function checkKeyCombinations() {
