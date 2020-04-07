@@ -43,11 +43,13 @@
     background-color: #e85af0;
 }
 
-.keyboard__key:active {
+
+/* .keyboard__key:active {
     background-color: #898989;
-    border-radius: 8px;
+    border-radius: 20px;
     border: none;
-}
+    transition: border-radius 0.5s linear;
+} */
 
 .backspace {
     width: 90px;
@@ -129,8 +131,10 @@
     background-color: #bab2b2;
 }
 
+.keyboard__key:active,
 .active {
     background-color: #898989;
-    border-radius: 8px;
+    border-radius: 20px;
     border: none;
+    transition: border-radius 0.5s linear;
 }
