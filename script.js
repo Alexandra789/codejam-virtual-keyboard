@@ -1,5 +1,6 @@
 let currentLang = 'ru';
 let upperCase = false;
+let shifted = false;
 let pressedKeys = [];
 
 let contentWrapper = document.createElement('div');
@@ -47,8 +48,14 @@ function createButton(keyCode, lang) {
     if (keyCode in SPECIAL_KEYS)
         keyboardKey.className += ` ${ SPECIAL_KEYS[keyCode] }
     `;
-    else if (upperCase) {
-        keyboardKey.innerText = keyboardKey.innerText.toUpperCase();
+    else {
+        if (shifted && keyCode in SHIFT_KEYS[currentLang]) {
+            keyboardKey.innerText = SHIFT_KEYS[currentLang][keyCode];
+        }
+
+        if ((upperCase && !shifted) || (!upperCase && shifted)) {
+            keyboardKey.innerText = keyboardKey.innerText.toUpperCase();
+        }
     }
 
     return keyboardKey;
@@ -82,9 +89,16 @@ function keyboardClickButton(e) {
     e.preventDefault();
     let keyboardKey = document.querySelectorAll('.keyboard__key')
     for (let i = 0; i < keyboardKey.length; i++) {
-        if (e.keyCode == keyboardKey[i].value) {
+        let code = e.keyCode;
+        if (e.location === 2)
+            code = -code;
+        if (code == keyboardKey[i].value) {
             keyboardKey[i].className += ' active';
         }
+    }
+
+    if (e.keyCode == 16) {
+        toggleShift(true);
     }
 
     if (!pressedKeys.includes(e.keyCode))
@@ -97,9 +111,16 @@ function keyboardReleaseButton(e) {
     e.preventDefault();
     let keyboardKey = document.querySelectorAll('.keyboard__key')
     for (let i = 0; i < keyboardKey.length; i++) {
-        if (e.keyCode == keyboardKey[i].value) {
+        let code = e.keyCode;
+        if (e.location === 2)
+            code = -code;
+        if (code == keyboardKey[i].value) {
             keyboardKey[i].classList.remove('active');
         }
+    }
+
+    if (e.keyCode == 16) {
+        toggleShift(false);
     }
 
     var index = pressedKeys.indexOf(e.keyCode);
@@ -120,6 +141,14 @@ function printLetter(letter) {
 
 function toggleCaps() {
     upperCase = !upperCase;
+    keyboardKeys.innerHTML = '';
+    createKeyboard();
+}
+
+function toggleShift(toggle) {
+    if (shifted === toggle) return;
+
+    shifted = toggle;
     keyboardKeys.innerHTML = '';
     createKeyboard();
 }
@@ -156,6 +185,10 @@ function handleSpecialKey(key) {
         printLetter('►');
     } else if (key == 40) {
         printLetter('▼');
+    } else if (key == 9) {
+        printLetter('\t');
+    } else if (key == 13) {
+        printLetter('\n');
     }
 }
 
@@ -163,10 +196,11 @@ function handleKeyPress(keyCode) {
     if (keyCode in SPECIAL_KEYS)
         handleSpecialKey(keyCode);
     else {
-        printLetter(KEY_LAYOUTS[currentLang][keyCode]);
+        if (shifted && keyCode in SHIFT_KEYS[currentLang])
+            printLetter(SHIFT_KEYS[currentLang][keyCode]);
+        else
+            printLetter(KEY_LAYOUTS[currentLang][keyCode]);
     }
-
-    textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
 }
 
 function checkKeyCombinations() {
