@@ -148,8 +148,14 @@ function handleSpecialKey(key) {
         eraseLetter();
     } else if (key == 20) {
         toggleCaps();
-    } else if (key === 38) {
-
+    } else if (key == 38) {
+        printLetter('▲');
+    } else if (key == 37) {
+        printLetter('◄');
+    } else if (key == 39) {
+        printLetter('►');
+    } else if (key == 40) {
+        printLetter('▼');
     }
 }
 
