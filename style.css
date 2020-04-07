@@ -43,14 +43,6 @@
     background-color: #e85af0;
 }
 
-
-/* .keyboard__key:active {
-    background-color: #898989;
-    border-radius: 20px;
-    border: none;
-    transition: border-radius 0.5s linear;
-} */
-
 .backspace {
     width: 90px;
 }
