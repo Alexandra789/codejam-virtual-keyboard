@@ -42,21 +42,9 @@ function createButton(keyCode, lang) {
     keyboardKey.value = keyCode;
     keyboardKey.innerText = KEY_LAYOUTS[lang][keyCode];
 
-    if (keyCode >= 37 && keyCode <= 40)
-        keyboardKey.innerText = '';
-
     if (keyCode in SPECIAL_KEYS)
         keyboardKey.className += ` ${ SPECIAL_KEYS[keyCode] }
     `;
-    else {
-        if (shifted && keyCode in SHIFT_KEYS[currentLang]) {
-            keyboardKey.innerText = SHIFT_KEYS[currentLang][keyCode];
-        }
-
-        if ((upperCase && !shifted) || (!upperCase && shifted)) {
-            keyboardKey.innerText = keyboardKey.innerText.toUpperCase();
-        }
-    }
 
     return keyboardKey;
 }
@@ -79,8 +67,6 @@ function bindMouseClicks() {
             else {
                 handleSpecialKey(e.target.value);
             }
-
-            textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
         }
     })
 }
@@ -97,7 +83,7 @@ function keyboardClickButton(e) {
         }
     }
 
-    if (e.keyCode == 16) {
+    if (e.keyCode == 16) { // shift
         toggleShift(true);
     }
 
@@ -105,6 +91,24 @@ function keyboardClickButton(e) {
         pressedKeys.push(e.keyCode);
     handleKeyPress(e.keyCode, e.location);
     checkKeyCombinations();
+}
+
+function rewriteKeyboard() {
+    let keyboardKey = document.querySelectorAll('.keyboard__key')
+    for (let i = 0; i < keyboardKey.length; i++) {
+        let keyCode = keyboardKey[i].value;
+        keyboardKey[i].innerText = KEY_LAYOUTS[currentLang][keyCode];
+
+        if (!(keyCode in SPECIAL_KEYS)) {
+            if (shifted && keyCode in SHIFT_KEYS[currentLang]) {
+                keyboardKey[i].innerText = SHIFT_KEYS[currentLang][keyCode];
+            }
+
+            if (upperCase != shifted) {
+                keyboardKey[i].innerText = keyboardKey[i].innerText.toUpperCase();
+            }
+        }
+    }
 }
 
 function keyboardReleaseButton(e) {
@@ -119,7 +123,7 @@ function keyboardReleaseButton(e) {
         }
     }
 
-    if (e.keyCode == 16) {
+    if (e.keyCode == 16) { // shift
         toggleShift(false);
     }
 
@@ -128,29 +132,40 @@ function keyboardReleaseButton(e) {
 }
 
 function eraseLetter() {
-    textarea.innerHTML = textarea.innerHTML.slice(0, -1);
+    let caretPos = textarea.selectionStart;
+    let text = textarea.innerHTML;
+    textarea.innerHTML = text.slice(0, caretPos - 1) + text.slice(caretPos);
+    textarea.selectionStart = caretPos - 1;
+}
+
+function deleteNextLetter() {
+    let caretPos = textarea.selectionStart;
+    let text = textarea.innerHTML;
+    textarea.innerHTML = text.slice(0, caretPos) + text.slice(caretPos + 1);
+    textarea.selectionStart = caretPos;
 }
 
 function printLetter(letter) {
     if (!letter) return;
 
-    if (upperCase)
+    if (upperCase != shifted)
         letter = letter.toUpperCase();
-    textarea.innerHTML += letter;
+    let caretPos = textarea.selectionStart;
+    let text = textarea.innerHTML;
+    textarea.innerHTML = `${text.slice(0, caretPos)}${letter}${text.slice(caretPos)}`;
+    textarea.selectionStart = caretPos + 1;
 }
 
 function toggleCaps() {
     upperCase = !upperCase;
-    keyboardKeys.innerHTML = '';
-    createKeyboard();
+    rewriteKeyboard();
 }
 
 function toggleShift(toggle) {
     if (shifted === toggle) return;
 
     shifted = toggle;
-    keyboardKeys.innerHTML = '';
-    createKeyboard();
+    rewriteKeyboard();
 }
 
 function switchLang() {
@@ -166,8 +181,7 @@ function switchLang() {
 
 function changeLang(lang) {
     currentLang = lang;
-    keyboardKeys.innerHTML = '';
-    createKeyboard();
+    rewriteKeyboard();
 }
 
 function handleSpecialKey(key) {
@@ -180,15 +194,19 @@ function handleSpecialKey(key) {
     } else if (key == 38) {
         printLetter('▲');
     } else if (key == 37) {
-        printLetter('◄');
+        textarea.selectionStart -= 1;
+        textarea.selectionEnd = textarea.selectionStart;
     } else if (key == 39) {
-        printLetter('►');
+        textarea.selectionStart += 1;
+        textarea.selectionEnd = textarea.selectionStart;
     } else if (key == 40) {
         printLetter('▼');
     } else if (key == 9) {
         printLetter('\t');
     } else if (key == 13) {
         printLetter('\n');
+    } else if (key == 46) {
+        deleteNextLetter();
     }
 }
 

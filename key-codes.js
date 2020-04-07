@@ -55,7 +55,7 @@ const KEY_LAYOUTS = {
         188: 'б',
         190: 'ю',
         191: '.',
-        38: 'upKey',
+        38: '',
         '-16': 'RShift',
         17: 'Ctrl',
         91: 'Win',
@@ -63,9 +63,9 @@ const KEY_LAYOUTS = {
         32: 'Space',
         '-18': 'RAlt',
         '-17': 'RCtrl',
-        37: 'leftKey',
-        40: 'downKey',
-        39: 'rightKey',
+        37: '',
+        40: '',
+        39: '',
     },
 
     'en': {
@@ -122,7 +122,7 @@ const KEY_LAYOUTS = {
         188: ',',
         190: '.',
         191: '/',
-        38: 'upKey',
+        38: '',
         '-16': 'RShift',
         17: 'Ctrl',
         91: 'Win',
@@ -130,9 +130,9 @@ const KEY_LAYOUTS = {
         32: 'Space',
         '-18': 'RAlt',
         '-17': 'RCtrl',
-        37: 'leftKey',
-        40: 'downKey',
-        39: 'rightKey',
+        37: '',
+        40: '',
+        39: '',
     }
 }
 
