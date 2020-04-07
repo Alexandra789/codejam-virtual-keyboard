@@ -62,11 +62,11 @@
 }
 
 .left {
-    background-image: url('../codejam/assets/images/left.svg');
+    background-image: url('./assets/images/left.svg');
 }
 
 .right {
-    background-image: url('../codejam/assets/images/right.svg');
+    background-image: url('./assets/images/right.svg');
 }
 
 .up,
@@ -78,12 +78,12 @@
 }
 
 .up {
-    background-image: url('../codejam/assets/images/up.svg');
+    background-image: url('./assets/images/up.svg');
 }
 
 .down {
     background-position-y: -30px;
-    background-image: url('../codejam/assets/images/down.svg');
+    background-image: url('./assets/images/down.svg');
 }
 
 .space {
