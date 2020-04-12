@@ -133,7 +133,7 @@ const KEY_LAYOUTS = {
         37: '',
         40: '',
         39: '',
-    }
+    },
 };
 
 const KEY_MAP = [
@@ -162,7 +162,7 @@ const SPECIAL_KEYS = {
     '-16': 'shift-right',
     '-17': 'ctrl-right',
     '-18': 'alt-right'
-}
+};
 
 const SHIFT_KEYS = {
     'ru': {
@@ -203,5 +203,5 @@ const SHIFT_KEYS = {
         188: '<',
         190: '>',
         191: '?',
-    }
+    },
 };
