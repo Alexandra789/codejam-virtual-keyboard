@@ -42,18 +42,16 @@ export class Layout {
         this.loadstorage();
     };
 
-    loadstorage() {
-        let self = this;
-
-        window.onbeforeunload = function() {
-            let currentLang = self.input.getCurrentLang;
+    loadstorage = () => {
+        window.onbeforeunload = ()=> {
+            let currentLang = this.input.getCurrentLang;
             localStorage.setItem("lang", currentLang);
         };
          
-        window.onload = function() {
+        window.onload = () => {
             var lang = localStorage.getItem("lang");
             if (lang !== null){
-                self.input.changeLang(lang);
+                this.input.changeLang(lang);
             };
         };
     };

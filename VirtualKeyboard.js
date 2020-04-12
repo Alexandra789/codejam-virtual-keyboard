@@ -18,8 +18,8 @@ export class VirtualKeyboard {
 
     keyboardClickButton(e) {
         e.preventDefault();
-        let keyboardKey = document.querySelectorAll('.keyboard__key')
-        for (let i = 0; i < keyboardKey.length; i += 1) {
+        let keyboardKey = document.querySelectorAll('.keyboard__key');
+        for (let i = 0; i < keyboardKey.length; i++) {
             let code = e.keyCode;
             if(e.location === 2){
                 code = -code;
@@ -43,8 +43,8 @@ export class VirtualKeyboard {
 
     keyboardReleaseButton(e) {
         e.preventDefault();
-        let keyboardKey = document.querySelectorAll('.keyboard__key')
-        for (let i = 0; i < keyboardKey.length; i += 1) {
+        let keyboardKey = document.querySelectorAll('.keyboard__key');
+        for (let i = 0; i < keyboardKey.length; i++) {
             let code = e.keyCode;
             if(e.location === 2){
                 code = -code;
@@ -67,12 +67,10 @@ export class VirtualKeyboard {
     handleKeyPress(keyCode) {
         if (keyCode in SPECIAL_KEYS){
             this.handleSpecialKey(keyCode);
-        }
-        else {
+        } else {
             if(this.shifted && keyCode in SHIFT_KEYS[this.currentLang]){
                 this.target.printLetter(SHIFT_KEYS[this.currentLang][keyCode]);
-            }
-            else{
+            } else {
                 let letter = KEY_LAYOUTS[this.currentLang][keyCode];
                 if (this.upperCase != this.shifted){
                     letter = letter.toUpperCase();
@@ -153,8 +151,7 @@ export class VirtualKeyboard {
         let index = LANGS.indexOf(this.currentLang);
         if (index >= LANGS.length - 1){
             nextLang = LANGS[0];
-        }
-        else{
+        } else {
             nextLang = LANGS[index + 1];
         }
         this.changeLang(nextLang);
@@ -166,8 +163,8 @@ export class VirtualKeyboard {
     };
 
     rewriteKeyboard() {
-        let keyboardKey = document.querySelectorAll('.keyboard__key')
-        for (let i = 0; i < keyboardKey.length; i += 1) {
+        let keyboardKey = document.querySelectorAll('.keyboard__key');
+        for (let i = 0; i < keyboardKey.length; i++) {
             let keyCode = keyboardKey[i].value;
             keyboardKey[i].innerText = KEY_LAYOUTS[this.currentLang][keyCode];
 
@@ -182,15 +179,13 @@ export class VirtualKeyboard {
             };
         };
     };
-
-    bindMouseClicks() {
-        let self = this;
+ 
+    bindMouseClicks = () => {
         this.element.addEventListener('click', function(e) {
             if (e.target.tagName === 'BUTTON') {
                 if (!(e.target.value in SPECIAL_KEYS)){
                     self.target.printLetter(e.target.innerText);
-                }
-                else {
+                } else {
                     self.handleSpecialKey(e.target.value);
                 };
             };
@@ -212,8 +207,8 @@ export class VirtualKeyboard {
     };
 
     createKeyboard() {
-        let fragment = document.createDocumentFragment()
-        for (let i = 0; i < KEY_MAP.length; i += 1) {
+        let fragment = document.createDocumentFragment();
+        for (let i = 0; i < KEY_MAP.length; i++) {
             fragment.appendChild(
                 this.createButton(KEY_MAP[i], this.currentLang)
             );
