@@ -1,0 +1,115 @@
+.textarea {
+    width: 900px;
+    height: 250px;
+    resize: none;
+    display: block;
+    margin: 0 auto;
+    font: 18px sans-serif;
+    border: 2px solid black;
+}
+
+.keyboard {
+    margin: 0 auto;
+    width: 943px;
+    height: 257px;
+    background-color: black;
+    margin-top: 20px;
+    border-radius: 7px;
+}
+
+.keyboard__keys {
+    text-align: center;
+    user-select: none;
+}
+
+.keyboard__key {
+    height: 45px;
+    width: 59px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin: 3px;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    padding: 0px;
+    position: relative;
+}
+
+.keyboard__key:hover {
+    background-color: #e85af0;
+}
+
+.backspace {
+    width: 90px;
+}
+
+.left,
+.right {
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+.left {
+    background-image: url('./assets/images/left.svg');
+}
+
+.right {
+    background-image: url('./assets/images/right.svg');
+}
+
+.up,
+.down {
+    background-size: 46px;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: 0px;
+}
+
+.up {
+    background-image: url('./assets/images/up.svg');
+}
+
+.down {
+    background-position-y: -30px;
+    background-image: url('./assets/images/down.svg');
+}
+
+.space {
+    width: 415px;
+}
+
+.tab,
+.del {
+    width: 43px
+}
+
+.enter,
+.caps {
+    width: 107px;
+}
+
+.shift-left {
+    width: 155px;
+}
+
+.info-wrapper {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.btn_dark{
+    background-color: #bab2b2;
+}
+
+.keyboard__key:active,
+.active {
+    background-color: #898989;
+    border-radius: 20px;
+    border: none;
+    transition: border-radius 0.5s linear;
+}
