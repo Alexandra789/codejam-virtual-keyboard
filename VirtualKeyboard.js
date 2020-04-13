@@ -182,7 +182,6 @@ export class VirtualKeyboard {
  
     bindMouseClicks(){
         this.element.addEventListener('click', (e) => {
-            console.log('Pizdec');
             if (e.target.tagName === 'BUTTON') {
                 if (!(e.target.value in SPECIAL_KEYS)){
                     this.target.printLetter(e.target.innerText);
