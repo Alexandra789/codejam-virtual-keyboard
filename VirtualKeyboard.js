@@ -180,13 +180,14 @@ export class VirtualKeyboard {
         };
     };
  
-    bindMouseClicks = () => {
-        this.element.addEventListener('click', function(e) {
+    bindMouseClicks(){
+        this.element.addEventListener('click', (e) => {
+            console.log('Pizdec');
             if (e.target.tagName === 'BUTTON') {
                 if (!(e.target.value in SPECIAL_KEYS)){
-                    self.target.printLetter(e.target.innerText);
+                    this.target.printLetter(e.target.innerText);
                 } else {
-                    self.handleSpecialKey(e.target.value);
+                    this.handleSpecialKey(e.target.value);
                 };
             };
         });

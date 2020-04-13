@@ -49,7 +49,7 @@ export class Layout {
         };
          
         window.onload = () => {
-            var lang = localStorage.getItem("lang");
+            let lang = localStorage.getItem("lang");
             if (lang !== null){
                 this.input.changeLang(lang);
             };
