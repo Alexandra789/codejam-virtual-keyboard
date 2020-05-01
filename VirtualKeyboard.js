@@ -81,6 +81,7 @@ export class VirtualKeyboard {
     };
 
     handleSpecialKey(key) {
+        console.log(typeof key);
         switch(key){
             case 32: {
                 this.target.printLetter(' ');
@@ -186,7 +187,7 @@ export class VirtualKeyboard {
                 if (!(e.target.value in SPECIAL_KEYS)){
                     this.target.printLetter(e.target.innerText);
                 } else {
-                    this.handleSpecialKey(e.target.value);
+                    this.handleSpecialKey(Number(e.target.value));
                 };
             };
         });
