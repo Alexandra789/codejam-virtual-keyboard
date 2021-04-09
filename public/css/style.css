@@ -55,11 +55,11 @@
 }
 
 .left {
-    background-image: url('./assets/images/left.svg');
+    background-image: url('../../res/images/left.svg');
 }
 
 .right {
-    background-image: url('./assets/images/right.svg');
+    background-image: url('../../res/images/right.svg');
 }
 
 .up,
@@ -71,12 +71,12 @@
 }
 
 .up {
-    background-image: url('./assets/images/up.svg');
+    background-image: url('../../res/images/up.svg');
 }
 
 .down {
     background-position-y: -30px;
-    background-image: url('./assets/images/down.svg');
+    background-image: url('../../res/images/down.svg');
 }
 
 .space {
