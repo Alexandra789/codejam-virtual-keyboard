@@ -1,5 +1,6 @@
 # codejam-virtual-keyboard
 
-Виртуальная клавиатура на чистом JS. Задача для работы с работы с DOM, DOM Events.
+Виртуальная клавиатура на чистом JS.
 
-https://alexandra789.github.io/codejam-virtual-keyboard/
+
+Задача для работы с работы с DOM, DOM Events.
